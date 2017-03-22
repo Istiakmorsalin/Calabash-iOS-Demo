@@ -8,6 +8,8 @@
 
 #if !os(Linux)
 
+import Foundation
+
 #if os(macOS)
 import Cocoa
 #else

@@ -6,6 +6,8 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
+import Foundation
+
 class SwitchSink<SourceType, S: ObservableConvertibleType, O: ObserverType>
     : Sink<O>
     , ObserverType
@@ -16,7 +18,7 @@ class SwitchSink<SourceType, S: ObservableConvertibleType, O: ObserverType>
     fileprivate let _subscriptions: SingleAssignmentDisposable = SingleAssignmentDisposable()
     fileprivate let _innerSubscription: SerialDisposable = SerialDisposable()
 
-    let _lock = RecursiveLock()
+    let _lock = NSRecursiveLock()
     
     // state
     fileprivate var _stopped = false
@@ -77,7 +79,7 @@ class SwitchSink<SourceType, S: ObservableConvertibleType, O: ObserverType>
     }
 }
 
-final class SwitchSinkIter<SourceType, S: ObservableConvertibleType, O: ObserverType>
+class SwitchSinkIter<SourceType, S: ObservableConvertibleType, O: ObserverType>
     : ObserverType
     , LockOwnerType
     , SynchronizedOnType where S.E == O.E {
@@ -88,7 +90,7 @@ final class SwitchSinkIter<SourceType, S: ObservableConvertibleType, O: Observer
     fileprivate let _id: Int
     fileprivate let _self: Disposable
 
-    var _lock: RecursiveLock {
+    var _lock: NSRecursiveLock {
         return _parent._lock
     }
 

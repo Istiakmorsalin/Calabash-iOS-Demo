@@ -6,16 +6,18 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-final class SkipUntilSinkOther<Other, O: ObserverType>
+import Foundation
+
+class SkipUntilSinkOther<ElementType, Other, O: ObserverType>
     : ObserverType
     , LockOwnerType
-    , SynchronizedOnType {
-    typealias Parent = SkipUntilSink<Other, O>
+    , SynchronizedOnType where O.E == ElementType {
+    typealias Parent = SkipUntilSink<ElementType, Other, O>
     typealias E = Other
     
     fileprivate let _parent: Parent
 
-    var _lock: RecursiveLock {
+    var _lock: NSRecursiveLock {
         return _parent._lock
     }
     
@@ -54,15 +56,15 @@ final class SkipUntilSinkOther<Other, O: ObserverType>
 }
 
 
-final class SkipUntilSink<Other, O: ObserverType>
+class SkipUntilSink<ElementType, Other, O: ObserverType>
     : Sink<O>
     , ObserverType
     , LockOwnerType
-    , SynchronizedOnType {
-    typealias E = O.E
+    , SynchronizedOnType where O.E == ElementType {
+    typealias E = ElementType
     typealias Parent = SkipUntil<E, Other>
     
-    let _lock = RecursiveLock()
+    let _lock = NSRecursiveLock()
     fileprivate let _parent: Parent
     fileprivate var _forwardElements = false
     
@@ -85,12 +87,12 @@ final class SkipUntilSink<Other, O: ObserverType>
             }
         case .error:
             forwardOn(event)
-            self.dispose()
+            dispose()
         case .completed:
             if _forwardElements {
                 forwardOn(event)
             }
-            self.dispose()
+            _sourceSubscription.dispose()
         }
     }
     
@@ -105,7 +107,7 @@ final class SkipUntilSink<Other, O: ObserverType>
     }
 }
 
-final class SkipUntil<Element, Other>: Producer<Element> {
+class SkipUntil<Element, Other>: Producer<Element> {
     
     fileprivate let _source: Observable<Element>
     fileprivate let _other: Observable<Other>

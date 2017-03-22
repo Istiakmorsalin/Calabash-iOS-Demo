@@ -6,6 +6,7 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
+import Foundation
 #if !RX_NO_MODULE
     import RxSwift
 #endif
@@ -108,7 +109,7 @@ extension SharedSequence {
     - returns: An observable sequence with no elements.
     */
     public static func empty() -> SharedSequence<S, E> {
-        return SharedSequence(raw: Observable.empty().subscribeOn(S.scheduler))
+        return SharedSequence(Observable.empty().subscribeOn(S.scheduler))
     }
 
     /**
@@ -117,7 +118,7 @@ extension SharedSequence {
     - returns: An observable sequence whose observers will never get called.
     */
     public static func never() -> SharedSequence<S, E> {
-        return SharedSequence(raw: Observable.never())
+        return SharedSequence(Observable.never())
     }
 
     /**
@@ -127,7 +128,7 @@ extension SharedSequence {
     - returns: An observable sequence containing the single specified element.
     */
     public static func just(_ element: E) -> SharedSequence<S, E> {
-        return SharedSequence(raw: Observable.just(element).subscribeOn(S.scheduler))
+        return SharedSequence(Observable.just(element).subscribeOn(S.scheduler))
     }
 
     /**

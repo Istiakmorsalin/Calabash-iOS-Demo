@@ -6,11 +6,13 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
+import Foundation
+
 // count version
 
-final class SkipCountSink<O: ObserverType> : Sink<O>, ObserverType {
-    typealias Element = O.E
-    typealias Parent = SkipCount<Element>
+class SkipCountSink<ElementType, O: ObserverType> : Sink<O>, ObserverType where O.E == ElementType {
+    typealias Parent = SkipCount<ElementType>
+    typealias Element = ElementType
     
     let parent: Parent
     
@@ -43,7 +45,7 @@ final class SkipCountSink<O: ObserverType> : Sink<O>, ObserverType {
     
 }
 
-final class SkipCount<Element>: Producer<Element> {
+class SkipCount<Element>: Producer<Element> {
     let source: Observable<Element>
     let count: Int
     
@@ -62,7 +64,7 @@ final class SkipCount<Element>: Producer<Element> {
 
 // time version
 
-final class SkipTimeSink<ElementType, O: ObserverType> : Sink<O>, ObserverType where O.E == ElementType {
+class SkipTimeSink<ElementType, O: ObserverType> : Sink<O>, ObserverType where O.E == ElementType {
     typealias Parent = SkipTime<ElementType>
     typealias Element = ElementType
 
@@ -107,7 +109,7 @@ final class SkipTimeSink<ElementType, O: ObserverType> : Sink<O>, ObserverType w
     }
 }
 
-final class SkipTime<Element>: Producer<Element> {
+class SkipTime<Element>: Producer<Element> {
     let source: Observable<Element>
     let duration: RxTimeInterval
     let scheduler: SchedulerType

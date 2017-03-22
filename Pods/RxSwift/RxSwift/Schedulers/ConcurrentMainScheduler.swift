@@ -6,8 +6,7 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-import struct Foundation.Date
-import struct Foundation.TimeInterval
+import Foundation
 import Dispatch
 
 /**

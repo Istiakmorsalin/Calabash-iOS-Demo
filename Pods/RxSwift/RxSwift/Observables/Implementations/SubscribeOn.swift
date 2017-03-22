@@ -6,7 +6,9 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-final class SubscribeOnSink<Ob: ObservableType, O: ObserverType> : Sink<O>, ObserverType where Ob.E == O.E {
+import Foundation
+
+class SubscribeOnSink<Ob: ObservableType, O: ObserverType> : Sink<O>, ObserverType where Ob.E == O.E {
     typealias Element = O.E
     typealias Parent = SubscribeOn<Ob>
     
@@ -43,7 +45,7 @@ final class SubscribeOnSink<Ob: ObservableType, O: ObserverType> : Sink<O>, Obse
     }
 }
 
-final class SubscribeOn<Ob: ObservableType> : Producer<Ob.E> {
+class SubscribeOn<Ob: ObservableType> : Producer<Ob.E> {
     let source: Ob
     let scheduler: ImmediateSchedulerType
     

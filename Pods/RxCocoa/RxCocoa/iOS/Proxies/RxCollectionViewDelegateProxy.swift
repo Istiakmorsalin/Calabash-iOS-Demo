@@ -8,6 +8,7 @@
 
 #if os(iOS) || os(tvOS)
 
+import Foundation
 import UIKit
 #if !RX_NO_MODULE
 import RxSwift
@@ -26,7 +27,7 @@ public class RxCollectionViewDelegateProxy
     ///
     /// - parameter parentObject: Parent object for delegate proxy.
     public required init(parentObject: AnyObject) {
-        self.collectionView = castOrFatalError(parentObject)
+        self.collectionView = (parentObject as! UICollectionView)
         super.init(parentObject: parentObject)
     }
 }

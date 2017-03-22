@@ -10,17 +10,16 @@
 		1B9E3CDC8BA2EBAE06403AAC /* Pods_Calabash_iOS_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB112748FD6993B27075BD99 /* Pods_Calabash_iOS_Demo.framework */; };
 		58A0BCB21E6DC40F0042428C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A0BCB11E6DC40F0042428C /* AppDelegate.swift */; };
 		58A0BCB41E6DC40F0042428C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A0BCB31E6DC40F0042428C /* ViewController.swift */; };
-		58A0BCB71E6DC40F0042428C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58A0BCB51E6DC40F0042428C /* Main.storyboard */; };
 		58A0BCB91E6DC40F0042428C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58A0BCB81E6DC40F0042428C /* Assets.xcassets */; };
 		58A0BCBC1E6DC40F0042428C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58A0BCBA1E6DC40F0042428C /* LaunchScreen.storyboard */; };
 		58A0BCC61E6DC72E0042428C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 58A0BCC51E6DC72E0042428C /* Podfile */; };
+		F6F61F701E82533B00A5D92D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6F61F6F1E82533B00A5D92D /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		58A0BCAE1E6DC40F0042428C /* Calabash-iOS-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Calabash-iOS-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		58A0BCB11E6DC40F0042428C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58A0BCB31E6DC40F0042428C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		58A0BCB61E6DC40F0042428C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		58A0BCB81E6DC40F0042428C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		58A0BCBB1E6DC40F0042428C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		58A0BCBD1E6DC40F0042428C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -28,6 +27,7 @@
 		74C4CFCB9B1B0398ED1741EA /* Pods-Calabash-iOS-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Calabash-iOS-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Calabash-iOS-Demo/Pods-Calabash-iOS-Demo.release.xcconfig"; sourceTree = "<group>"; };
 		AB112748FD6993B27075BD99 /* Pods_Calabash_iOS_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Calabash_iOS_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2DB508C784C61584DB0A4E /* Pods-Calabash-iOS-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Calabash-iOS-Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Calabash-iOS-Demo/Pods-Calabash-iOS-Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		F6F61F6F1E82533B00A5D92D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +75,7 @@
 				58A0BCC51E6DC72E0042428C /* Podfile */,
 				58A0BCB11E6DC40F0042428C /* AppDelegate.swift */,
 				58A0BCB31E6DC40F0042428C /* ViewController.swift */,
-				58A0BCB51E6DC40F0042428C /* Main.storyboard */,
+				F6F61F6F1E82533B00A5D92D /* Main.storyboard */,
 				58A0BCB81E6DC40F0042428C /* Assets.xcassets */,
 				58A0BCBA1E6DC40F0042428C /* LaunchScreen.storyboard */,
 				58A0BCBD1E6DC40F0042428C /* Info.plist */,
@@ -126,6 +126,7 @@
 				TargetAttributes = {
 					58A0BCAD1E6DC40F0042428C = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = XYSCZDXKR7;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -156,7 +157,7 @@
 				58A0BCBC1E6DC40F0042428C /* LaunchScreen.storyboard in Resources */,
 				58A0BCB91E6DC40F0042428C /* Assets.xcassets in Resources */,
 				58A0BCC61E6DC72E0042428C /* Podfile in Resources */,
-				58A0BCB71E6DC40F0042428C /* Main.storyboard in Resources */,
+				F6F61F701E82533B00A5D92D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,14 +224,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		58A0BCB51E6DC40F0042428C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				58A0BCB61E6DC40F0042428C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		58A0BCBA1E6DC40F0042428C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -282,7 +275,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -325,7 +318,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -338,6 +331,7 @@
 			baseConfigurationReference = EB2DB508C784C61584DB0A4E /* Pods-Calabash-iOS-Demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = XYSCZDXKR7;
 				INFOPLIST_FILE = "Calabash-iOS-Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -363,6 +357,7 @@
 			baseConfigurationReference = 74C4CFCB9B1B0398ED1741EA /* Pods-Calabash-iOS-Demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = XYSCZDXKR7;
 				INFOPLIST_FILE = "Calabash-iOS-Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (

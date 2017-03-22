@@ -8,6 +8,7 @@
 
 #if os(iOS)
 
+import Foundation
 #if !RX_NO_MODULE
 import RxSwift
 #endif

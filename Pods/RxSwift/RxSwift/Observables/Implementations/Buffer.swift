@@ -6,7 +6,9 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-final class BufferTimeCount<Element> : Producer<[Element]> {
+import Foundation
+
+class BufferTimeCount<Element> : Producer<[Element]> {
     
     fileprivate let _timeSpan: RxTimeInterval
     fileprivate let _count: Int
@@ -27,7 +29,7 @@ final class BufferTimeCount<Element> : Producer<[Element]> {
     }
 }
 
-final class BufferTimeCountSink<Element, O: ObserverType>
+class BufferTimeCountSink<Element, O: ObserverType>
     : Sink<O>
     , LockOwnerType
     , ObserverType
@@ -37,7 +39,7 @@ final class BufferTimeCountSink<Element, O: ObserverType>
     
     private let _parent: Parent
     
-    let _lock = RecursiveLock()
+    let _lock = NSRecursiveLock()
     
     // state
     private let _timerD = SerialDisposable()

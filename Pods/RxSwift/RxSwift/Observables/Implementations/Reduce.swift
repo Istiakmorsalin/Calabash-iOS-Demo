@@ -6,7 +6,9 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-final class ReduceSink<SourceType, AccumulateType, O: ObserverType> : Sink<O>, ObserverType {
+import Foundation
+
+class ReduceSink<SourceType, AccumulateType, O: ObserverType> : Sink<O>, ObserverType {
     typealias ResultType = O.E
     typealias Parent = Reduce<SourceType, AccumulateType, ResultType>
     
@@ -48,7 +50,7 @@ final class ReduceSink<SourceType, AccumulateType, O: ObserverType> : Sink<O>, O
     }
 }
 
-final class Reduce<SourceType, AccumulateType, ResultType> : Producer<ResultType> {
+class Reduce<SourceType, AccumulateType, ResultType> : Producer<ResultType> {
     typealias AccumulatorType = (AccumulateType, SourceType) throws -> AccumulateType
     typealias ResultSelectorType = (AccumulateType) throws -> ResultType
     

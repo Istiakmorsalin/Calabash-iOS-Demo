@@ -6,9 +6,10 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
+import Foundation
 
-final class ElementAtSink<O: ObserverType> : Sink<O>, ObserverType {
-    typealias SourceType = O.E
+
+class ElementAtSink<SourceType, O: ObserverType> : Sink<O>, ObserverType where O.E == SourceType {
     typealias Parent = ElementAt<SourceType>
     
     let _parent: Parent
@@ -54,7 +55,7 @@ final class ElementAtSink<O: ObserverType> : Sink<O>, ObserverType {
     }
 }
 
-final class ElementAt<SourceType> : Producer<SourceType> {
+class ElementAt<SourceType> : Producer<SourceType> {
     
     let _source: Observable<SourceType>
     let _throwOnEmpty: Bool
@@ -72,7 +73,7 @@ final class ElementAt<SourceType> : Producer<SourceType> {
     
     override func run<O: ObserverType>(_ observer: O, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where O.E == SourceType {
         let sink = ElementAtSink(parent: self, observer: observer, cancel: cancel)
-        let subscription = _source.subscribe(sink)
+        let subscription = _source.subscribeSafe(sink)
         return (sink: sink, subscription: subscription)
     }
 }

@@ -8,6 +8,7 @@
 
 #if os(iOS)
 
+import Foundation
 #if !RX_NO_MODULE
 import RxSwift
 #endif
@@ -15,7 +16,9 @@ import UIKit
 
 extension Reactive where Base: UIButton {
     
-    /// Reactive wrapper for `TouchUpInside` control event.
+    /**
+    Reactive wrapper for `TouchUpInside` control event.
+    */
     public var tap: ControlEvent<Void> {
         return controlEvent(.touchUpInside)
     }
@@ -25,6 +28,7 @@ extension Reactive where Base: UIButton {
 
 #if os(tvOS)
 
+import Foundation
 #if !RX_NO_MODULE
     import RxSwift
 #endif
@@ -43,6 +47,7 @@ extension Reactive where Base: UIButton {
 
 #if os(iOS) || os(tvOS)
 
+    import Foundation
 #if !RX_NO_MODULE
     import RxSwift
 #endif

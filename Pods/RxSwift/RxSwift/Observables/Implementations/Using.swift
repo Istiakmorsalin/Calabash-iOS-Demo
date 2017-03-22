@@ -6,9 +6,12 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-final class UsingSink<ResourceType: Disposable, O: ObserverType> : Sink<O>, ObserverType {
-    typealias SourceType = O.E
+import Foundation
+
+class UsingSink<SourceType, ResourceType: Disposable, O: ObserverType> : Sink<O>, ObserverType where O.E == SourceType {
+
     typealias Parent = Using<SourceType, ResourceType>
+    typealias E = O.E
 
     private let _parent: Parent
     
@@ -37,7 +40,7 @@ final class UsingSink<ResourceType: Disposable, O: ObserverType> : Sink<O>, Obse
         }
     }
     
-    func on(_ event: Event<SourceType>) {
+    func on(_ event: Event<E>) {
         switch event {
         case let .next(value):
             forwardOn(.next(value))

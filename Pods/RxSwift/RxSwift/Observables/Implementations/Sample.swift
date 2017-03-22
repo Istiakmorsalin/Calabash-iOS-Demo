@@ -6,17 +6,19 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-final class SamplerSink<O: ObserverType, SampleType>
+import Foundation
+
+class SamplerSink<O: ObserverType, ElementType, SampleType>
     : ObserverType
     , LockOwnerType
-    , SynchronizedOnType {
+    , SynchronizedOnType where O.E == ElementType {
     typealias E = SampleType
     
     typealias Parent = SampleSequenceSink<O, SampleType>
     
     fileprivate let _parent: Parent
 
-    var _lock: RecursiveLock {
+    var _lock: NSRecursiveLock {
         return _parent._lock
     }
     
@@ -32,7 +34,10 @@ final class SamplerSink<O: ObserverType, SampleType>
         switch event {
         case .next:
             if let element = _parent._element {
-                _parent._element = nil
+                if _parent._parent._onlyNew {
+                    _parent._element = nil
+                }
+                
                 _parent.forwardOn(.next(element))
             }
 
@@ -56,7 +61,7 @@ final class SamplerSink<O: ObserverType, SampleType>
     }
 }
 
-final class SampleSequenceSink<O: ObserverType, SampleType>
+class SampleSequenceSink<O: ObserverType, SampleType>
     : Sink<O>
     , ObserverType
     , LockOwnerType
@@ -66,7 +71,7 @@ final class SampleSequenceSink<O: ObserverType, SampleType>
     
     fileprivate let _parent: Parent
 
-    let _lock = RecursiveLock()
+    let _lock = NSRecursiveLock()
     
     // state
     fileprivate var _element = nil as Element?
@@ -105,13 +110,15 @@ final class SampleSequenceSink<O: ObserverType, SampleType>
     
 }
 
-final class Sample<Element, SampleType> : Producer<Element> {
+class Sample<Element, SampleType> : Producer<Element> {
     fileprivate let _source: Observable<Element>
     fileprivate let _sampler: Observable<SampleType>
+    fileprivate let _onlyNew: Bool
 
-    init(source: Observable<Element>, sampler: Observable<SampleType>) {
+    init(source: Observable<Element>, sampler: Observable<SampleType>, onlyNew: Bool) {
         _source = source
         _sampler = sampler
+        _onlyNew = onlyNew
     }
     
     override func run<O: ObserverType>(_ observer: O, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where O.E == Element {

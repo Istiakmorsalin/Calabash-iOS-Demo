@@ -6,7 +6,9 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-final class ObservableSequenceSink<S: Sequence, O: ObserverType> : Sink<O> where S.Iterator.Element == O.E {
+import Foundation
+
+class ObservableSequenceSink<S: Sequence, O: ObserverType> : Sink<O> where S.Iterator.Element == O.E {
     typealias Parent = ObservableSequence<S>
 
     private let _parent: Parent
@@ -25,13 +27,12 @@ final class ObservableSequenceSink<S: Sequence, O: ObserverType> : Sink<O> where
             }
             else {
                 self.forwardOn(.completed)
-                self.dispose()
             }
         }
     }
 }
 
-final class ObservableSequence<S: Sequence> : Producer<S.Iterator.Element> {
+class ObservableSequence<S: Sequence> : Producer<S.Iterator.Element> {
     fileprivate let _elements: S
     fileprivate let _scheduler: ImmediateSchedulerType
 

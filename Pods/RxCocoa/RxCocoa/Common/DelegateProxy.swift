@@ -8,6 +8,7 @@
 
 #if !os(Linux)
 
+import Foundation
 #if !RX_NO_MODULE
     import RxSwift
     #if SWIFT_PACKAGE && !os(Linux)
@@ -248,7 +249,7 @@ open class DelegateProxy : _RXDelegateProxy {
 
     // MARK: Pointer
 
-    final class func _pointer(_ p: UnsafeRawPointer) -> UnsafeRawPointer {
+    class func _pointer(_ p: UnsafeRawPointer) -> UnsafeRawPointer {
         return p
     }
 }

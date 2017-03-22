@@ -6,14 +6,12 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
+import Foundation
+
 class Sink<O : ObserverType> : Disposable {
     fileprivate let _observer: O
     fileprivate let _cancel: Cancelable
     fileprivate var _disposed: Bool
-
-    #if DEBUG
-        fileprivate var _numberOfConcurrentCalls: AtomicInt = 0
-    #endif
 
     init(observer: O, cancel: Cancelable) {
 #if TRACE_RESOURCES
@@ -25,15 +23,6 @@ class Sink<O : ObserverType> : Disposable {
     }
     
     final func forwardOn(_ event: Event<O.E>) {
-        #if DEBUG
-            if AtomicIncrement(&_numberOfConcurrentCalls) > 1 {
-                rxFatalError("Warning: Recursive call or synchronization error!")
-            }
-
-            defer {
-                _ = AtomicDecrement(&_numberOfConcurrentCalls)
-            }
-        #endif
         if _disposed {
             return
         }
@@ -44,7 +33,7 @@ class Sink<O : ObserverType> : Disposable {
         return SinkForward(forward: self)
     }
 
-    final var disposed: Bool {
+    var disposed: Bool {
         return _disposed
     }
 
@@ -60,7 +49,7 @@ class Sink<O : ObserverType> : Disposable {
     }
 }
 
-final class SinkForward<O: ObserverType>: ObserverType {
+class SinkForward<O: ObserverType>: ObserverType {
     typealias E = O.E
     
     private let _forward: Sink<O>
@@ -69,7 +58,7 @@ final class SinkForward<O: ObserverType>: ObserverType {
         _forward = forward
     }
     
-    final func on(_ event: Event<E>) {
+    func on(_ event: Event<E>) {
         switch event {
         case .next:
             _forward._observer.on(event)

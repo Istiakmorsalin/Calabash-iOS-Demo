@@ -6,10 +6,13 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-final class DelaySubscriptionSink<O: ObserverType>
-    : Sink<O>, ObserverType {
+import Foundation
+
+class DelaySubscriptionSink<ElementType, O: ObserverType>
+    : Sink<O>
+    , ObserverType where O.E == ElementType {
+    typealias Parent = DelaySubscription<ElementType>
     typealias E = O.E
-    typealias Parent = DelaySubscription<E>
     
     private let _parent: Parent
     
@@ -27,7 +30,7 @@ final class DelaySubscriptionSink<O: ObserverType>
     
 }
 
-final class DelaySubscription<Element>: Producer<Element> {
+class DelaySubscription<Element>: Producer<Element> {
     private let _source: Observable<Element>
     private let _dueTime: RxTimeInterval
     private let _scheduler: SchedulerType

@@ -6,9 +6,9 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-import struct Foundation.Date
+import Foundation
 
-final class ThrottleSink<O: ObserverType>
+class ThrottleSink<O: ObserverType>
     : Sink<O>
     , ObserverType
     , LockOwnerType
@@ -18,7 +18,7 @@ final class ThrottleSink<O: ObserverType>
     
     private let _parent: ParentType
     
-    let _lock = RecursiveLock()
+    let _lock = NSRecursiveLock()
     
     // state
     private var _lastUnsentElement: Element? = nil
@@ -120,7 +120,7 @@ final class ThrottleSink<O: ObserverType>
     }
 }
 
-final class Throttle<Element> : Producer<Element> {
+class Throttle<Element> : Producer<Element> {
     
     fileprivate let _source: Observable<Element>
     fileprivate let _dueTime: RxTimeInterval

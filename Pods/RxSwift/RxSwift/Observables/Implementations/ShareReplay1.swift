@@ -6,6 +6,8 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
+import Foundation
+
 // optimized version of share replay for most common case
 final class ShareReplay1<Element>
     : Observable<Element>
@@ -16,23 +18,21 @@ final class ShareReplay1<Element>
 
     private let _source: Observable<Element>
 
-    private let _lock = RecursiveLock()
+    private var _lock = NSRecursiveLock()
 
     private var _connection: SingleAssignmentDisposable?
     private var _element: Element?
     private var _stopped = false
     private var _stopEvent = nil as Event<Element>?
-    private var _observers = Bag<(Event<Element>) -> ()>()
+    private var _observers = Bag<AnyObserver<Element>>()
 
     init(source: Observable<Element>) {
         self._source = source
     }
 
     override func subscribe<O : ObserverType>(_ observer: O) -> Disposable where O.E == E {
-        _lock.lock()
-        let result = _synchronized_subscribe(observer)
-        _lock.unlock()
-        return result
+        _lock.lock(); defer { _lock.unlock() }
+        return _synchronized_subscribe(observer)
     }
 
     func _synchronized_subscribe<O : ObserverType>(_ observer: O) -> Disposable where O.E == E {
@@ -47,7 +47,7 @@ final class ShareReplay1<Element>
 
         let initialCount = self._observers.count
 
-        let disposeKey = self._observers.insert(observer.on)
+        let disposeKey = self._observers.insert(AnyObserver(observer))
 
         if initialCount == 0 {
             let connection = SingleAssignmentDisposable()
@@ -60,9 +60,8 @@ final class ShareReplay1<Element>
     }
 
     func synchronizedUnsubscribe(_ disposeKey: DisposeKey) {
-        _lock.lock()
+        _lock.lock(); defer { _lock.unlock() }
         _synchronized_unsubscribe(disposeKey)
-        _lock.unlock()
     }
 
     func _synchronized_unsubscribe(_ disposeKey: DisposeKey) {
@@ -78,10 +77,10 @@ final class ShareReplay1<Element>
     }
 
     func on(_ event: Event<E>) {
-        dispatch(_synchronized_on(event), event)
+        _synchronized_on(event).on(event)
     }
 
-    func _synchronized_on(_ event: Event<E>) -> Bag<(Event<Element>) -> ()> {
+    func _synchronized_on(_ event: Event<E>) -> Bag<AnyObserver<Element>> {
         _lock.lock(); defer { _lock.unlock() }
         if _stopped {
             return Bag()
@@ -96,8 +95,7 @@ final class ShareReplay1<Element>
             _connection?.dispose()
             _connection = nil
         }
-        
+
         return _observers
     }
-    
 }

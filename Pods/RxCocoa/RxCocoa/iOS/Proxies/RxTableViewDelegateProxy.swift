@@ -8,6 +8,7 @@
 
 #if os(iOS) || os(tvOS)
 
+import Foundation
 import UIKit
 #if !RX_NO_MODULE
 import RxSwift
@@ -26,7 +27,7 @@ public class RxTableViewDelegateProxy
     ///
     /// - parameter parentObject: Parent object for delegate proxy.
     public required init(parentObject: AnyObject) {
-        self.tableView = castOrFatalError(parentObject)
+        self.tableView = (parentObject as! UITableView)
         super.init(parentObject: parentObject)
     }
 

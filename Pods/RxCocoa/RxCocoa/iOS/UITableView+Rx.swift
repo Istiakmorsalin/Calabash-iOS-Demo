@@ -8,6 +8,7 @@
 
 #if os(iOS) || os(tvOS)
 
+import Foundation
 #if !RX_NO_MODULE
 import RxSwift
 #endif
@@ -38,7 +39,7 @@ extension Reactive where Base: UITableView {
              cell.textLabel?.text = "\(element) @ row \(row)"
              return cell
          }
-         .disposed(by: disposeBag)
+         .addDisposableTo(disposeBag)
 
      */
     public func items<S: Sequence, O: ObservableType>
@@ -70,10 +71,10 @@ extension Reactive where Base: UITableView {
          ])
 
          items
-             .bindTo(tableView.rx.items(cellIdentifier: "Cell", cellType: UITableViewCell.self)) { (row, element, cell) in
+             .bindTo(tableView.items(cellIdentifier: "Cell", cellType: UITableViewCell.self)) { (row, element, cell) in
                 cell.textLabel?.text = "\(element) @ row \(row)"
              }
-             .disposed(by: disposeBag)
+             .addDisposableTo(disposeBag)
     */
     public func items<S: Sequence, Cell: UITableViewCell, O : ObservableType>
         (cellIdentifier: String, cellType: Cell.Type = Cell.self)
@@ -136,7 +137,7 @@ extension Reactive where Base: UITableView {
 
         items
             .bindTo(tableView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
+            .addDisposableTo(disposeBag)
     */
     public func items<
             DataSource: RxTableViewDataSourceType & UITableViewDataSource,

@@ -8,6 +8,7 @@
 
 #if os(iOS) || os(tvOS)
 
+import Foundation
 #if !RX_NO_MODULE
 import RxSwift
 #endif
@@ -39,7 +40,7 @@ extension Reactive where Base: UICollectionView {
              cell.value?.text = "\(element) @ \(row)"
              return cell
          }
-         .disposed(by: disposeBag)
+         .addDisposableTo(disposeBag)
     */
     public func items<S: Sequence, O: ObservableType>
         (_ source: O)
@@ -73,7 +74,7 @@ extension Reactive where Base: UICollectionView {
              .bindTo(collectionView.rx.items(cellIdentifier: "Cell", cellType: NumberCell.self)) { (row, element, cell) in
                 cell.value?.text = "\(element) @ \(row)"
              }
-             .disposed(by: disposeBag)
+             .addDisposableTo(disposeBag)
     */
     public func items<S: Sequence, Cell: UICollectionViewCell, O : ObservableType>
         (cellIdentifier: String, cellType: Cell.Type = Cell.self)
@@ -132,7 +133,7 @@ extension Reactive where Base: UICollectionView {
 
          items
             .bindTo(collectionView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
+            .addDisposableTo(disposeBag)
     */
     public func items<
             DataSource: RxCollectionViewDataSourceType & UICollectionViewDataSource,

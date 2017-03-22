@@ -6,16 +6,16 @@
 //  Copyright © 2016 Krunoslav Zaher. All rights reserved.
 //
 
-import struct Foundation.Date
+import Foundation
 
-final class DelaySink<O: ObserverType>
+class DelaySink<ElementType, O: ObserverType>
     : Sink<O>
-    , ObserverType {
+    , ObserverType where O.E == ElementType {
     typealias E = O.E
     typealias Source = Observable<E>
     typealias DisposeKey = Bag<Disposable>.KeyType
     
-    private let _lock = RecursiveLock()
+    private let _lock = NSRecursiveLock()
 
     private let _dueTime: RxTimeInterval
     private let _scheduler: SchedulerType
@@ -139,13 +139,13 @@ final class DelaySink<O: ObserverType>
         }
     }
     
-    func run(source: Observable<E>) -> Disposable {
-        _sourceSubscription.setDisposable(source.subscribe(self))
+    func run(source: Source) -> Disposable {
+        _sourceSubscription.setDisposable(source.subscribeSafe(self))
         return Disposables.create(_sourceSubscription, _cancelable)
     }
 }
 
-final class Delay<Element>: Producer<Element> {
+class Delay<Element>: Producer<Element> {
     private let _source: Observable<Element>
     private let _dueTime: RxTimeInterval
     private let _scheduler: SchedulerType

@@ -6,6 +6,8 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
+import Foundation
+
 #if TRACE_RESOURCES
     fileprivate var _numberOfSerialDispatchQueueObservables: AtomicInt = 0
     extension Resources {
@@ -20,7 +22,7 @@
     }
 #endif
 
-final class ObserveOnSerialDispatchQueueSink<O: ObserverType> : ObserverBase<O.E> {
+class ObserveOnSerialDispatchQueueSink<O: ObserverType> : ObserverBase<O.E> {
     let scheduler: SerialDispatchQueueScheduler
     let observer: O
     
@@ -56,7 +58,7 @@ final class ObserveOnSerialDispatchQueueSink<O: ObserverType> : ObserverBase<O.E
     }
 }
     
-final class ObserveOnSerialDispatchQueue<E> : Producer<E> {
+class ObserveOnSerialDispatchQueue<E> : Producer<E> {
     let scheduler: SerialDispatchQueueScheduler
     let source: Observable<E>
     

@@ -6,9 +6,11 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
+import Foundation
+
 // catch with callback
 
-final class CatchSinkProxy<O: ObserverType> : ObserverType {
+class CatchSinkProxy<O: ObserverType> : ObserverType {
     typealias E = O.E
     typealias Parent = CatchSink<O>
     
@@ -30,7 +32,7 @@ final class CatchSinkProxy<O: ObserverType> : ObserverType {
     }
 }
 
-final class CatchSink<O: ObserverType> : Sink<O>, ObserverType {
+class CatchSink<O: ObserverType> : Sink<O>, ObserverType {
     typealias E = O.E
     typealias Parent = Catch<E>
     
@@ -73,7 +75,7 @@ final class CatchSink<O: ObserverType> : Sink<O>, ObserverType {
     }
 }
 
-final class Catch<Element> : Producer<Element> {
+class Catch<Element> : Producer<Element> {
     typealias Handler = (Swift.Error) throws -> Observable<Element>
     
     fileprivate let _source: Observable<Element>
@@ -93,7 +95,7 @@ final class Catch<Element> : Producer<Element> {
 
 // catch enumerable
 
-final class CatchSequenceSink<S: Sequence, O: ObserverType>
+class CatchSequenceSink<S: Sequence, O: ObserverType>
     : TailRecursiveSink<S, O>
     , ObserverType where S.Iterator.Element : ObservableConvertibleType, S.Iterator.Element.E == O.E {
     typealias Element = O.E
@@ -143,7 +145,7 @@ final class CatchSequenceSink<S: Sequence, O: ObserverType>
     }
 }
 
-final class CatchSequence<S: Sequence> : Producer<S.Iterator.Element.E> where S.Iterator.Element : ObservableConvertibleType {
+class CatchSequence<S: Sequence> : Producer<S.Iterator.Element.E> where S.Iterator.Element : ObservableConvertibleType {
     typealias Element = S.Iterator.Element.E
     
     let sources: S

@@ -6,7 +6,9 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-final class DistinctUntilChangedSink<O: ObserverType, Key>: Sink<O>, ObserverType {
+import Foundation
+
+class DistinctUntilChangedSink<O: ObserverType, Key>: Sink<O>, ObserverType {
     typealias E = O.E
     
     private let _parent: DistinctUntilChanged<E, Key>
@@ -46,7 +48,7 @@ final class DistinctUntilChangedSink<O: ObserverType, Key>: Sink<O>, ObserverTyp
     }
 }
 
-final class DistinctUntilChanged<Element, Key>: Producer<Element> {
+class DistinctUntilChanged<Element, Key>: Producer<Element> {
     typealias KeySelector = (Element) throws -> Key
     typealias EqualityComparer = (Key, Key) throws -> Bool
     

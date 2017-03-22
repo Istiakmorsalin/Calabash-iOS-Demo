@@ -6,8 +6,11 @@
 //  Copyright © 2016 Krunoslav Zaher. All rights reserved.
 //
 
+import Foundation
+
 #if os(iOS) || os(tvOS)
 
+import Foundation
 import UIKit
     
 #if !RX_NO_MODULE

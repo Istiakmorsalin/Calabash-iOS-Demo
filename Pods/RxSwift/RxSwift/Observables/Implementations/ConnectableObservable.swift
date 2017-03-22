@@ -6,6 +6,8 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
+import Foundation
+
 /**
  Represents an observable wrapper that can be connected and disconnected from its underlying observable sequence.
 */
@@ -23,60 +25,48 @@ public class ConnectableObservable<Element>
     }
 }
 
-final class Connection<S: SubjectType> : ObserverType, Disposable {
-    typealias E = S.SubjectObserverType.E
+class Connection<S: SubjectType> : Disposable {
 
-    private var _lock: RecursiveLock
+    private var _lock: NSRecursiveLock
     // state
     private var _parent: ConnectableObservableAdapter<S>?
     private var _subscription : Disposable?
-    private var _subjectObserver: S.SubjectObserverType
 
-    private var _disposed: Bool = false
-
-    init(parent: ConnectableObservableAdapter<S>, subjectObserver: S.SubjectObserverType, lock: RecursiveLock, subscription: Disposable) {
+    init(parent: ConnectableObservableAdapter<S>, lock: NSRecursiveLock, subscription: Disposable) {
         _parent = parent
         _subscription = subscription
         _lock = lock
-        _subjectObserver = subjectObserver
-    }
-
-    func on(_ event: Event<S.SubjectObserverType.E>) {
-        if _disposed {
-            return
-        }
-        _subjectObserver.on(event)
-        if event.isStopEvent {
-            self.dispose()
-        }
     }
     
     func dispose() {
         _lock.lock(); defer { _lock.unlock() } // {
-            _disposed = true
             guard let parent = _parent else {
                 return
             }
-        
+
+            guard let oldSubscription = _subscription else {
+                return
+            }
+            
+            _subscription = nil
             if parent._connection === self {
                 parent._connection = nil
             }
             _parent = nil
-
-            _subscription?.dispose()
-            _subscription = nil
+            
+            oldSubscription.dispose()
         // }
     }
 }
 
-final class ConnectableObservableAdapter<S: SubjectType>
+class ConnectableObservableAdapter<S: SubjectType>
     : ConnectableObservable<S.E> {
     typealias ConnectionType = Connection<S>
     
     fileprivate let _subject: S
     fileprivate let _source: Observable<S.SubjectObserverType.E>
     
-    fileprivate let _lock = RecursiveLock()
+    fileprivate let _lock = NSRecursiveLock()
     
     // state
     fileprivate var _connection: ConnectionType?
@@ -92,12 +82,10 @@ final class ConnectableObservableAdapter<S: SubjectType>
             if let connection = _connection {
                 return connection
             }
-
-            let singleAssignmentDisposable = SingleAssignmentDisposable()
-            let connection = Connection(parent: self, subjectObserver: _subject.asObserver(), lock: _lock, subscription: singleAssignmentDisposable)
+            
+            let disposable = _source.subscribe(_subject.asObserver())
+            let connection = Connection(parent: self, lock: _lock, subscription: disposable)
             _connection = connection
-            let subscription = _source.subscribe(connection)
-            singleAssignmentDisposable.setDisposable(subscription)
             return connection
         }
     }

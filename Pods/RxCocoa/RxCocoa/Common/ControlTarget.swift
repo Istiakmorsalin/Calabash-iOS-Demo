@@ -8,6 +8,7 @@
 
 #if os(iOS) || os(tvOS) || os(macOS)
 
+import Foundation
 #if !RX_NO_MODULE
 import RxSwift
 #endif
@@ -24,7 +25,7 @@ import RxSwift
 #endif
 
 // This should be only used from `MainScheduler`
-final class ControlTarget: RxTarget {
+class ControlTarget: RxTarget {
     typealias Callback = (Control) -> Void
 
     let selector: Selector = #selector(ControlTarget.eventHandler(_:))

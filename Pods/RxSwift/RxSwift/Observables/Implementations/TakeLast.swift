@@ -6,17 +6,20 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-final class TakeLastSink<O: ObserverType> : Sink<O>, ObserverType {
-    typealias E = O.E
-    typealias Parent = TakeLast<E>
+import Foundation
+
+
+class TakeLastSink<ElementType, O: ObserverType> : Sink<O>, ObserverType where O.E == ElementType {
+    typealias Parent = TakeLast<ElementType>
+    typealias E = ElementType
     
     private let _parent: Parent
     
-    private var _elements: Queue<E>
+    private var _elements: Queue<ElementType>
     
     init(parent: Parent, observer: O, cancel: Cancelable) {
         _parent = parent
-        _elements = Queue<E>(capacity: parent._count + 1)
+        _elements = Queue<ElementType>(capacity: parent._count + 1)
         super.init(observer: observer, cancel: cancel)
     }
     
@@ -40,7 +43,7 @@ final class TakeLastSink<O: ObserverType> : Sink<O>, ObserverType {
     }
 }
 
-final class TakeLast<Element>: Producer<Element> {
+class TakeLast<Element>: Producer<Element> {
     fileprivate let _source: Observable<Element>
     fileprivate let _count: Int
     

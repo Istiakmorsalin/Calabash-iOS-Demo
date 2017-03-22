@@ -4,10 +4,10 @@ Given(/^the app has launched$/) do
   end
 end
 
-Given(/^I type Username and Password$/) do
+Given(/^I type email and number$/) do
   touch('textField index:0')
-  set_text('textField index:0', 'Meraj')
-  sleep 0.5
+  set_text('textField index:0', 'omuk@m')
   touch('textField index:1')
-  set_text('textField index:1', 'Secret')
+  set_text('textField index:1', '12345')
 end
+

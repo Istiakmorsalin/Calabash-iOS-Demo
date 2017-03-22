@@ -6,7 +6,9 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-final class TimerSink<O: ObserverType> : Sink<O> where O.E : SignedInteger  {
+import Foundation
+
+class TimerSink<O: ObserverType> : Sink<O> where O.E : SignedInteger  {
     typealias Parent = Timer<O.E>
     
     private let _parent: Parent
@@ -24,7 +26,7 @@ final class TimerSink<O: ObserverType> : Sink<O> where O.E : SignedInteger  {
     }
 }
 
-final class TimerOneOffSink<O: ObserverType> : Sink<O> where O.E : SignedInteger {
+class TimerOneOffSink<O: ObserverType> : Sink<O> where O.E : SignedInteger {
     typealias Parent = Timer<O.E>
     
     private let _parent: Parent
@@ -35,17 +37,16 @@ final class TimerOneOffSink<O: ObserverType> : Sink<O> where O.E : SignedInteger
     }
     
     func run() -> Disposable {
-        return _parent._scheduler.scheduleRelative(self, dueTime: _parent._dueTime) { (`self`) -> Disposable in
+        return _parent._scheduler.scheduleRelative((), dueTime: _parent._dueTime) { (_) -> Disposable in
             self.forwardOn(.next(0))
             self.forwardOn(.completed)
-            self.dispose()
-
+            
             return Disposables.create()
         }
     }
 }
 
-final class Timer<E: SignedInteger>: Producer<E> {
+class Timer<E: SignedInteger>: Producer<E> {
     fileprivate let _scheduler: SchedulerType
     fileprivate let _dueTime: RxTimeInterval
     fileprivate let _period: RxTimeInterval?

@@ -1,12 +1,14 @@
 //
-//  Debounce.swift
+//  Debunce.swift
 //  RxSwift
 //
 //  Created by Krunoslav Zaher on 9/11/16.
 //  Copyright © 2016 Krunoslav Zaher. All rights reserved.
 //
 
-final class DebounceSink<O: ObserverType>
+import Foundation
+
+class DebounceSink<O: ObserverType>
     : Sink<O>
     , ObserverType
     , LockOwnerType
@@ -16,7 +18,7 @@ final class DebounceSink<O: ObserverType>
 
     private let _parent: ParentType
 
-    let _lock = RecursiveLock()
+    let _lock = NSRecursiveLock()
 
     // state
     private var _id = 0 as UInt64
@@ -81,7 +83,7 @@ final class DebounceSink<O: ObserverType>
     }
 }
 
-final class Debounce<Element> : Producer<Element> {
+class Debounce<Element> : Producer<Element> {
 
     fileprivate let _source: Observable<Element>
     fileprivate let _dueTime: RxTimeInterval

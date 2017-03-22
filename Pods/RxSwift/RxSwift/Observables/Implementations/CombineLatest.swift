@@ -6,6 +6,8 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
+import Foundation
+
 protocol CombineLatestProtocol : class {
     func next(_ index: Int)
     func fail(_ error: Swift.Error)
@@ -17,7 +19,7 @@ class CombineLatestSink<O: ObserverType>
     , CombineLatestProtocol {
     typealias Element = O.E
    
-    let _lock = RecursiveLock()
+    let _lock = NSRecursiveLock()
 
     private let _arity: Int
     private var _numberOfValues = 0
@@ -90,7 +92,7 @@ class CombineLatestSink<O: ObserverType>
     }
 }
 
-final class CombineLatestObserver<ElementType>
+class CombineLatestObserver<ElementType>
     : ObserverType
     , LockOwnerType
     , SynchronizedOnType {
@@ -99,12 +101,12 @@ final class CombineLatestObserver<ElementType>
     
     private let _parent: CombineLatestProtocol
     
-    let _lock: RecursiveLock
+    let _lock: NSRecursiveLock
     private let _index: Int
     private let _this: Disposable
     private let _setLatestValue: ValueSetter
     
-    init(lock: RecursiveLock, parent: CombineLatestProtocol, index: Int, setLatestValue: @escaping ValueSetter, this: Disposable) {
+    init(lock: NSRecursiveLock, parent: CombineLatestProtocol, index: Int, setLatestValue: @escaping ValueSetter, this: Disposable) {
         _lock = lock
         _parent = parent
         _index = index

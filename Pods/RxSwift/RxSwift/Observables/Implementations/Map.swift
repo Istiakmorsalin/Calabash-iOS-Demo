@@ -6,7 +6,9 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-final class MapSink<SourceType, O : ObserverType> : Sink<O>, ObserverType {
+import Foundation
+
+class MapSink<SourceType, O : ObserverType> : Sink<O>, ObserverType {
     typealias Transform = (SourceType) throws -> ResultType
 
     typealias ResultType = O.E
@@ -40,7 +42,7 @@ final class MapSink<SourceType, O : ObserverType> : Sink<O>, ObserverType {
     }
 }
 
-final class MapWithIndexSink<SourceType, O : ObserverType> : Sink<O>, ObserverType {
+class MapWithIndexSink<SourceType, O : ObserverType> : Sink<O>, ObserverType {
     typealias Selector = (SourceType, Int) throws -> ResultType
 
     typealias ResultType = O.E
@@ -77,7 +79,7 @@ final class MapWithIndexSink<SourceType, O : ObserverType> : Sink<O>, ObserverTy
     }
 }
 
-final class MapWithIndex<SourceType, ResultType> : Producer<ResultType> {
+class MapWithIndex<SourceType, ResultType> : Producer<ResultType> {
     typealias Selector = (SourceType, Int) throws -> ResultType
 
     private let _source: Observable<SourceType>
@@ -105,7 +107,7 @@ final class MapWithIndex<SourceType, ResultType> : Producer<ResultType> {
     }
 #endif
 
-final class Map<SourceType, ResultType>: Producer<ResultType> {
+class Map<SourceType, ResultType>: Producer<ResultType> {
     typealias Transform = (SourceType) throws -> ResultType
 
     private let _source: Observable<SourceType>

@@ -6,7 +6,9 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-final class StartWith<Element>: Producer<Element> {
+import Foundation
+
+class StartWith<Element>: Producer<Element> {
     let elements: [Element]
     let source: Observable<Element>
 

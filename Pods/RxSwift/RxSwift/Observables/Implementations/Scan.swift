@@ -6,8 +6,9 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-final class ScanSink<ElementType, O: ObserverType> : Sink<O>, ObserverType {
-    typealias Accumulate = O.E
+import Foundation
+
+class ScanSink<ElementType, Accumulate, O: ObserverType> : Sink<O>, ObserverType where O.E == Accumulate {
     typealias Parent = Scan<ElementType, Accumulate>
     typealias E = ElementType
     
@@ -42,7 +43,7 @@ final class ScanSink<ElementType, O: ObserverType> : Sink<O>, ObserverType {
     
 }
 
-final class Scan<Element, Accumulate>: Producer<Accumulate> {
+class Scan<Element, Accumulate>: Producer<Accumulate> {
     typealias Accumulator = (Accumulate, Element) throws -> Accumulate
     
     fileprivate let _source: Observable<Element>

@@ -7,6 +7,8 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
+import Foundation
+
 
 
 // 2
@@ -30,7 +32,7 @@ extension Observable {
     }
 }
 
-final class ZipSink2_<E1, E2, O: ObserverType> : ZipSink<O> {
+class ZipSink2_<E1, E2, O: ObserverType> : ZipSink<O> {
     typealias R = O.E
     typealias Parent = Zip2<E1, E2, R>
 
@@ -77,7 +79,7 @@ final class ZipSink2_<E1, E2, O: ObserverType> : ZipSink<O> {
     }
 }
 
-final class Zip2<E1, E2, R> : Producer<R> {
+class Zip2<E1, E2, R> : Producer<R> {
     typealias ResultSelector = (E1, E2) throws -> R
 
     let source1: Observable<E1>
@@ -122,7 +124,7 @@ extension Observable {
     }
 }
 
-final class ZipSink3_<E1, E2, E3, O: ObserverType> : ZipSink<O> {
+class ZipSink3_<E1, E2, E3, O: ObserverType> : ZipSink<O> {
     typealias R = O.E
     typealias Parent = Zip3<E1, E2, E3, R>
 
@@ -175,7 +177,7 @@ final class ZipSink3_<E1, E2, E3, O: ObserverType> : ZipSink<O> {
     }
 }
 
-final class Zip3<E1, E2, E3, R> : Producer<R> {
+class Zip3<E1, E2, E3, R> : Producer<R> {
     typealias ResultSelector = (E1, E2, E3) throws -> R
 
     let source1: Observable<E1>
@@ -222,7 +224,7 @@ extension Observable {
     }
 }
 
-final class ZipSink4_<E1, E2, E3, E4, O: ObserverType> : ZipSink<O> {
+class ZipSink4_<E1, E2, E3, E4, O: ObserverType> : ZipSink<O> {
     typealias R = O.E
     typealias Parent = Zip4<E1, E2, E3, E4, R>
 
@@ -281,7 +283,7 @@ final class ZipSink4_<E1, E2, E3, E4, O: ObserverType> : ZipSink<O> {
     }
 }
 
-final class Zip4<E1, E2, E3, E4, R> : Producer<R> {
+class Zip4<E1, E2, E3, E4, R> : Producer<R> {
     typealias ResultSelector = (E1, E2, E3, E4) throws -> R
 
     let source1: Observable<E1>
@@ -330,7 +332,7 @@ extension Observable {
     }
 }
 
-final class ZipSink5_<E1, E2, E3, E4, E5, O: ObserverType> : ZipSink<O> {
+class ZipSink5_<E1, E2, E3, E4, E5, O: ObserverType> : ZipSink<O> {
     typealias R = O.E
     typealias Parent = Zip5<E1, E2, E3, E4, E5, R>
 
@@ -395,7 +397,7 @@ final class ZipSink5_<E1, E2, E3, E4, E5, O: ObserverType> : ZipSink<O> {
     }
 }
 
-final class Zip5<E1, E2, E3, E4, E5, R> : Producer<R> {
+class Zip5<E1, E2, E3, E4, E5, R> : Producer<R> {
     typealias ResultSelector = (E1, E2, E3, E4, E5) throws -> R
 
     let source1: Observable<E1>
@@ -446,7 +448,7 @@ extension Observable {
     }
 }
 
-final class ZipSink6_<E1, E2, E3, E4, E5, E6, O: ObserverType> : ZipSink<O> {
+class ZipSink6_<E1, E2, E3, E4, E5, E6, O: ObserverType> : ZipSink<O> {
     typealias R = O.E
     typealias Parent = Zip6<E1, E2, E3, E4, E5, E6, R>
 
@@ -517,7 +519,7 @@ final class ZipSink6_<E1, E2, E3, E4, E5, E6, O: ObserverType> : ZipSink<O> {
     }
 }
 
-final class Zip6<E1, E2, E3, E4, E5, E6, R> : Producer<R> {
+class Zip6<E1, E2, E3, E4, E5, E6, R> : Producer<R> {
     typealias ResultSelector = (E1, E2, E3, E4, E5, E6) throws -> R
 
     let source1: Observable<E1>
@@ -570,7 +572,7 @@ extension Observable {
     }
 }
 
-final class ZipSink7_<E1, E2, E3, E4, E5, E6, E7, O: ObserverType> : ZipSink<O> {
+class ZipSink7_<E1, E2, E3, E4, E5, E6, E7, O: ObserverType> : ZipSink<O> {
     typealias R = O.E
     typealias Parent = Zip7<E1, E2, E3, E4, E5, E6, E7, R>
 
@@ -647,7 +649,7 @@ final class ZipSink7_<E1, E2, E3, E4, E5, E6, E7, O: ObserverType> : ZipSink<O> 
     }
 }
 
-final class Zip7<E1, E2, E3, E4, E5, E6, E7, R> : Producer<R> {
+class Zip7<E1, E2, E3, E4, E5, E6, E7, R> : Producer<R> {
     typealias ResultSelector = (E1, E2, E3, E4, E5, E6, E7) throws -> R
 
     let source1: Observable<E1>
@@ -702,7 +704,7 @@ extension Observable {
     }
 }
 
-final class ZipSink8_<E1, E2, E3, E4, E5, E6, E7, E8, O: ObserverType> : ZipSink<O> {
+class ZipSink8_<E1, E2, E3, E4, E5, E6, E7, E8, O: ObserverType> : ZipSink<O> {
     typealias R = O.E
     typealias Parent = Zip8<E1, E2, E3, E4, E5, E6, E7, E8, R>
 
@@ -785,7 +787,7 @@ final class ZipSink8_<E1, E2, E3, E4, E5, E6, E7, E8, O: ObserverType> : ZipSink
     }
 }
 
-final class Zip8<E1, E2, E3, E4, E5, E6, E7, E8, R> : Producer<R> {
+class Zip8<E1, E2, E3, E4, E5, E6, E7, E8, R> : Producer<R> {
     typealias ResultSelector = (E1, E2, E3, E4, E5, E6, E7, E8) throws -> R
 
     let source1: Observable<E1>

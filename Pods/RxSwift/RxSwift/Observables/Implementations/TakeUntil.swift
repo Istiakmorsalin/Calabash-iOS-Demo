@@ -6,16 +6,18 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-final class TakeUntilSinkOther<Other, O: ObserverType>
+import Foundation
+
+class TakeUntilSinkOther<ElementType, Other, O: ObserverType>
     : ObserverType
     , LockOwnerType
-    , SynchronizedOnType {
-    typealias Parent = TakeUntilSink<Other, O>
+    , SynchronizedOnType where O.E == ElementType {
+    typealias Parent = TakeUntilSink<ElementType, Other, O>
     typealias E = Other
     
     fileprivate let _parent: Parent
 
-    var _lock: RecursiveLock {
+    var _lock: NSRecursiveLock {
         return _parent._lock
     }
     
@@ -53,17 +55,17 @@ final class TakeUntilSinkOther<Other, O: ObserverType>
 #endif
 }
 
-final class TakeUntilSink<Other, O: ObserverType>
+class TakeUntilSink<ElementType, Other, O: ObserverType>
     : Sink<O>
     , LockOwnerType
     , ObserverType
-    , SynchronizedOnType {
-    typealias E = O.E
+    , SynchronizedOnType where O.E == ElementType {
+    typealias E = ElementType
     typealias Parent = TakeUntil<E, Other>
     
     fileprivate let _parent: Parent
  
-    let _lock = RecursiveLock()
+    let _lock = NSRecursiveLock()
     
     // state
     fileprivate var _open = false
@@ -100,7 +102,7 @@ final class TakeUntilSink<Other, O: ObserverType>
     }
 }
 
-final class TakeUntil<Element, Other>: Producer<Element> {
+class TakeUntil<Element, Other>: Producer<Element> {
     
     fileprivate let _source: Observable<Element>
     fileprivate let _other: Observable<Other>

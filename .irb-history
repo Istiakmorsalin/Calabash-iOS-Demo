@@ -1,0 +1,56 @@
+query("all button")
+query("all view marked:'login'")
+query*
+query(*)
+query("*")
+query("all button")
+label "Login"
+query("login").count
+query("Login").count
+query("button").count
+query("button")
+query("button marked: "Login"")
+query("button marked: "Login"))
+query("button marked: "Login")
+query("button")[0]
+query("button")[0]
+query("* marked:Login")
+
+query("button")[0]
+query("button")[0]
+query("* marked:Login")
+query("* marked:Login")
+query("button")[0]
+query("* marked:Login")
+exit
+query(*)
+dismiss_iphone_keyboard
+dismiss_ipad_keyboard
+query "textField isFirstResponder:1", :resignFirstResponder
+clear
+query "textField isFirstResponder:1", :resignFirstResponder
+query "textField isFirstResponder:1", :resignFirstResponder
+exit
+query "textField isFirstResponder:1", :resignFirstResponder
+query*
+query
+query help
+uery "textField isFirstResponder:1", :resignFirstResponder
+exit
+tap_keyboard_action_key
+query("*")
+exit
+query("*")
+DEVICE_ENDPOINT=http://192.168.2.7:37265 DEVICE_TARGET=0cfd84f3b230008af27ec41e1fd25bd1c96a5f05 calabash-ios console
+clear
+exit
+query("*")
+query("*")
+exit
+query("*")
+query("*")
+exit
+query("*")
+exit
+query("*")
+exit

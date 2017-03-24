@@ -31,6 +31,8 @@ class ViewController: UIViewController {
         loginButton.rx.tap
             .subscribe(onNext: { [weak self] in self?.showAlert() })
             .addDisposableTo(disposeBag)
+        //self.performSegue(withIdentifier: <#T##String#>, sender: <#T##Any?#>)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,12 +41,12 @@ class ViewController: UIViewController {
     }
     
     func showAlert() {
-        let alertController = UIAlertController(title: "Calabash-iOS-Demo", message: "Stay tuned!", preferredStyle: .alert)
-        
-        let OKAction = UIAlertAction(title: "OK", style: .default)
-        alertController.addAction(OKAction)
-        
-        self.present(alertController, animated: true)
+//        let alertController = UIAlertController(title: "Calabash-iOS-Demo", message: "Stay tuned!", preferredStyle: .alert)
+//        
+//        let OKAction = UIAlertAction(title: "OK", style: .default)
+//        alertController.addAction(OKAction)
+//        
+//        self.present(alertController, animated: true)
     }
 }
 

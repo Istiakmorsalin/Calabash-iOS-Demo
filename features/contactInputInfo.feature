@@ -3,7 +3,10 @@ In order to Submit a contact information, as a user, s/he has to input email and
 
 Scenario: Submit User Information with email and contact number
 	Given I type email and number 
-        Then I touch the "Button" button
+	Then I touch the "Login" button
 	Then I wait
-	Then I take picture
+	Then I swipe down
+	And I take picture
+	
+
 

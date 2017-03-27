@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class FirstTableViewController: UITableViewController {
 
+    
+    let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,7 +39,7 @@ class FirstTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 50
+        return 10
     }
 
    
@@ -42,11 +47,23 @@ class FirstTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! FirstTableViewCell
         
         cell.label.text = "I am here"
-        
+        cell.button.rx.tap
+            .subscribe(onNext: { [weak self] in self?.showMyAlert() })
+            .addDisposableTo(disposeBag)
+                    
 
         // Configure the cell...
 
         return cell
+    }
+    
+    func showMyAlert() {
+                let alertController = UIAlertController(title: "Calabash-iOS-Demo", message: "Stay tuned!", preferredStyle: .alert)
+        
+                let OKAction = UIAlertAction(title: "OK", style: .default)
+                alertController.addAction(OKAction)
+        
+                self.present(alertController, animated: true)
     }
  
 

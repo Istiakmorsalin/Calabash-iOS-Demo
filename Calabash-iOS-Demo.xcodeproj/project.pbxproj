@@ -13,6 +13,7 @@
 		58A0BCB91E6DC40F0042428C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58A0BCB81E6DC40F0042428C /* Assets.xcassets */; };
 		58A0BCBC1E6DC40F0042428C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58A0BCBA1E6DC40F0042428C /* LaunchScreen.storyboard */; };
 		58A0BCC61E6DC72E0042428C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 58A0BCC51E6DC72E0042428C /* Podfile */; };
+		F69F4D5B1E88E9170046E441 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69F4D5A1E88E9170046E441 /* SecondViewController.swift */; };
 		F6F61F701E82533B00A5D92D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6F61F6F1E82533B00A5D92D /* Main.storyboard */; };
 		F6F61F721E8286E200A5D92D /* FirstTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F61F711E8286E200A5D92D /* FirstTableViewController.swift */; };
 		F6F61F741E82875000A5D92D /* FirstTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F61F731E82875000A5D92D /* FirstTableViewCell.swift */; };
@@ -29,6 +30,7 @@
 		74C4CFCB9B1B0398ED1741EA /* Pods-Calabash-iOS-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Calabash-iOS-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Calabash-iOS-Demo/Pods-Calabash-iOS-Demo.release.xcconfig"; sourceTree = "<group>"; };
 		AB112748FD6993B27075BD99 /* Pods_Calabash_iOS_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Calabash_iOS_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2DB508C784C61584DB0A4E /* Pods-Calabash-iOS-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Calabash-iOS-Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Calabash-iOS-Demo/Pods-Calabash-iOS-Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		F69F4D5A1E88E9170046E441 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		F6F61F6F1E82533B00A5D92D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F6F61F711E8286E200A5D92D /* FirstTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstTableViewController.swift; sourceTree = "<group>"; };
 		F6F61F731E82875000A5D92D /* FirstTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstTableViewCell.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				58A0BCB11E6DC40F0042428C /* AppDelegate.swift */,
 				58A0BCB31E6DC40F0042428C /* ViewController.swift */,
 				F6F61F711E8286E200A5D92D /* FirstTableViewController.swift */,
+				F69F4D5A1E88E9170046E441 /* SecondViewController.swift */,
 				F6F61F6F1E82533B00A5D92D /* Main.storyboard */,
 				F6F61F731E82875000A5D92D /* FirstTableViewCell.swift */,
 				58A0BCB81E6DC40F0042428C /* Assets.xcassets */,
@@ -225,6 +228,7 @@
 				58A0BCB41E6DC40F0042428C /* ViewController.swift in Sources */,
 				58A0BCB21E6DC40F0042428C /* AppDelegate.swift in Sources */,
 				F6F61F741E82875000A5D92D /* FirstTableViewCell.swift in Sources */,
+				F69F4D5B1E88E9170046E441 /* SecondViewController.swift in Sources */,
 				F6F61F721E8286E200A5D92D /* FirstTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

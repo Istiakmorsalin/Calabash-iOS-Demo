@@ -5,7 +5,8 @@ Scenario: Submit User Information with email and contact number
 	Given I type email and number 
 	Then I touch the "Login" button
 	Then I wait
-	Then I swipe down
+	Then I swipe up
+	Then I touch the "Touch" button
 	And I take picture
 	
 

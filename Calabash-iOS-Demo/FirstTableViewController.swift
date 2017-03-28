@@ -45,8 +45,9 @@ class FirstTableViewController: UITableViewController {
    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! FirstTableViewCell
-        
-        cell.label.text = "I am here"
+        let cellNumber = indexPath.row
+        let cellNumberToString = String(cellNumber)
+        cell.label.text = "I am here " + cellNumberToString
         cell.button.rx.tap
             .subscribe(onNext: { [weak self] in self?.showMyAlert() })
             .addDisposableTo(disposeBag)

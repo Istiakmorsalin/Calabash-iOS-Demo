@@ -11,7 +11,7 @@ Given(/^I type email and number$/) do
   set_text('textField index:1', '12345')
   query("textField index:1", :resignFirstResponder)
   sleep 0.5
-  swipe :down, force: :strong
+  swipe :down, :query => "UITableViewCell marked:'I am here 5'", :offset => {:x => 123, :y => 30}, :"swipe-delta" =>{:vertical => {:dx=> 0, :dy=> 250} }
 end
 
 
